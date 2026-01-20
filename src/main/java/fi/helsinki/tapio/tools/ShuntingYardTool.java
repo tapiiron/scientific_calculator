@@ -91,7 +91,11 @@ while there are tokens on the operator stack:
                  *             pop o2 from the operator stack into the output queue
                  *         push o1 onto the operator stack
                  */
+                while (!operatorStack.lastElement().equals("(") && !operatorStack.empty() && firstIsGreaterInPrecedence(operatorStack.lastElement(), "" + token)) {
+                    outputQueue += operatorStack.pop();
+                }
                 operatorStack.push(""+token);
+
             } else if (token == ',') {
                 /* while the operator at the top of the operator stack is not a left parenthesis:
                 pop the operator from the operator stack into the output queue*/
@@ -129,4 +133,10 @@ while there are tokens on the operator stack:
 
         return outputQueue;
     }
+
+    public boolean firstIsGreaterInPrecedence(String first, String second) {
+        // TODO: implement
+        return false;
+    }
+
 }
