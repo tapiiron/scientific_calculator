@@ -69,13 +69,21 @@ while there are tokens on the operator stack:
                     index++;
                 }
                 // Check that funtion is valid
-                if (!funtion.equals("sin") && !funtion.equals("sqrt") && !funtion.equals("min") && !funtion.equals("max")) {
+                if (funtion.equals("sin") || funtion.equals("sqrt") || funtion.equals("min") || funtion.equals("max")) {
+                    operatorStack.push(funtion);
+                } else {
                     throw new Exception("Invalid function: " + funtion);
                 }
-                operatorStack.push(funtion);
-            } else if (token == '+' || token == '-' || token == '*' || token == '/') { // If token is operator
+            } else if (token == '+' || token == '-' || token == '*' || token == '/' || token == '^') { // If token is operator
                 // TODO: logic here
                 /**
+                 * Operator	Precedence	Associativity
+                 * ^	4	Right
+                 * ×	3	Left
+                 * ÷	3	Left
+                 * +	2	Left
+                 * −	2	Left
+                 *
                  * while (
                  *             there is an operator o2 at the top of the operator stack which is not a left parenthesis,
                  *             and (o2 has greater precedence than o1 or (o1 and o2 have the same precedence and o1 is left-associative))
@@ -85,20 +93,27 @@ while there are tokens on the operator stack:
                  */
                 operatorStack.push(""+token);
             } else if (token == ',') {
-                outputQueue += token;
+                /* while the operator at the top of the operator stack is not a left parenthesis:
+                pop the operator from the operator stack into the output queue*/
+                if (!operatorStack.lastElement().equals("(")) {
+                    outputQueue += operatorStack.pop();
+                }
             } else if (token == '(') {
                 operatorStack.push(""+token);
             } else if (token == ')') {
-                // TODO: logic here
-                /**
-                 *  while the operator at the top of the operator stack is not a left parenthesis:
-                 *             {assert the operator stack is not empty}
-                 *             pop the operator from the operator stack into the output queue
-                 *         {assert there is a left parenthesis at the top of the operator stack}
-                 *         pop the left parenthesis from the operator stack and discard it
-                 *         if there is a function token at the top of the operator stack, then:
-                 *             pop the function from the operator stack into the output queue
-                 */
+                // While the operator at the top of the operator stack is not a left parenthesis
+                while (!operatorStack.lastElement().equals("(")) {
+                    // Pop the operator from the operator stack into the output queue
+                    outputQueue += operatorStack.pop();
+                }
+
+                // Remove left parenthesis as it SHOULD be in top of the queue now
+                operatorStack.pop();
+
+                // If there is a function token at the top of the operator stack, then pop it into output queue
+                if (operatorStack.lastElement().equals("sin") || operatorStack.lastElement().equals("sqrt") || operatorStack.lastElement().equals("min") || operatorStack.lastElement().equals("max")) {
+                    outputQueue += operatorStack.pop();
+                }
             } else {
                 throw new Exception("Invalid token: " + token);
             }
