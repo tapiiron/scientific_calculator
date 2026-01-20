@@ -36,8 +36,8 @@ while there are tokens on the operator stack:
      */
 
     public void calculateOutputStack(String input) throws Exception {
-        if (input == null || input.lenght()<1) {
-            throw new Exception("Invalid input")
+        if (input == null || input.length()<1) {
+            throw new Exception("Invalid input");
         }
         // Remove all spaces
         input = input.replace(" ",""); 
