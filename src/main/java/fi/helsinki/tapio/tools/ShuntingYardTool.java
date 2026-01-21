@@ -91,7 +91,7 @@ while there are tokens on the operator stack:
                  *             pop o2 from the operator stack into the output queue
                  *         push o1 onto the operator stack
                  */
-                while (!operatorStack.lastElement().equals("(") && !operatorStack.empty() && firstIsGreaterInPrecedence(operatorStack.lastElement(), "" + token)) {
+                while (!operatorStack.empty() && !operatorStack.lastElement().equals("(") && firstIsGreaterInPrecedence(operatorStack.lastElement(), "" + token)) {
                     outputQueue += operatorStack.pop();
                 }
                 operatorStack.push(""+token);
@@ -106,7 +106,7 @@ while there are tokens on the operator stack:
                 operatorStack.push(""+token);
             } else if (token == ')') {
                 // While the operator at the top of the operator stack is not a left parenthesis
-                while (!operatorStack.lastElement().equals("(")) {
+                while (!operatorStack.empty() && !operatorStack.lastElement().equals("(")) {
                     // Pop the operator from the operator stack into the output queue
                     outputQueue += operatorStack.pop();
                 }
@@ -115,7 +115,7 @@ while there are tokens on the operator stack:
                 operatorStack.pop();
 
                 // If there is a function token at the top of the operator stack, then pop it into output queue
-                if (operatorStack.lastElement().equals("sin") || operatorStack.lastElement().equals("sqrt") || operatorStack.lastElement().equals("min") || operatorStack.lastElement().equals("max")) {
+                if (!operatorStack.empty() && operatorStack.lastElement().equals("sin") || operatorStack.lastElement().equals("sqrt") || operatorStack.lastElement().equals("min") || operatorStack.lastElement().equals("max")) {
                     outputQueue += operatorStack.pop();
                 }
             } else {
