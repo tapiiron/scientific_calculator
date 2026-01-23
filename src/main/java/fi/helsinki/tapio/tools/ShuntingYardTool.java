@@ -38,43 +38,34 @@ while there are tokens on the operator stack:
      */
 
     public String calculateOutputStack(String input) throws Exception {
-        if (input == null || input.length()<1) {
+        if (input == null || input.length() < 1 || !input.contains(" ")) {
             throw new Exception("Invalid input");
         }
-        // Remove all spaces and lowercase
-        input = input.replace(" ",""); 
         input = input.toLowerCase();
 
         int index = 0;
-        char[] tokens = input.toCharArray();
+        String[] tokens = input.split(" ");
 
         // Output queue
-        String outputQueue = "";
+        Stack<String> outputQueue = new Stack<>();
 
         // Operator stack
         Stack<String> operatorStack = new Stack<>();
 
         // Main loop of input characters
         while (index<tokens.length) {
-            char token = tokens[index];
+            String token = tokens[index];
 
-            if (Character.isDigit(token)) { // If token is number
-                outputQueue += token;
-            } else if (token == 's' || token == 'm' ) { // If token is function
-                // sin, sqrt, min and max Handle skip index here
-                String funtion = ""+token+tokens[index+1]+tokens[index+2];
-                index += 2;
-                if (funtion.equals("sqr")) {
-                    funtion = "sqrt";
-                    index++;
-                }
+            if (isDigit(token)) { // If token is number
+                outputQueue.push(token);
+            } else if (token.startsWith("s") || token.startsWith("m")) { // If token is function
                 // Check that funtion is valid
-                if (funtion.equals("sin") || funtion.equals("sqrt") || funtion.equals("min") || funtion.equals("max")) {
-                    operatorStack.push(funtion);
+                if (token.equals("sin") || token.equals("sqrt") || token.equals("min") || token.equals("max")) {
+                    operatorStack.push(token);
                 } else {
-                    throw new Exception("Invalid function: " + funtion);
+                    throw new Exception("Invalid function: " + token);
                 }
-            } else if (token == '+' || token == '-' || token == '*' || token == '/' || token == '^') { // If token is operator
+            } else if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/") || token.equals("^")) { // If token is operator
                 // TODO: logic here
                 /**
                  * Operator	Precedence	Associativity
@@ -92,23 +83,23 @@ while there are tokens on the operator stack:
                  *         push o1 onto the operator stack
                  */
                 while (!operatorStack.empty() && !operatorStack.lastElement().equals("(") && firstIsGreaterInPrecedence(operatorStack.lastElement(), "" + token)) {
-                    outputQueue += operatorStack.pop();
+                    outputQueue.push(operatorStack.pop());
                 }
                 operatorStack.push(""+token);
 
-            } else if (token == ',') {
+            } else if (token.equals(",")) {
                 /* while the operator at the top of the operator stack is not a left parenthesis:
                 pop the operator from the operator stack into the output queue*/
                 if (!operatorStack.lastElement().equals("(")) {
-                    outputQueue += operatorStack.pop();
+                    outputQueue.push(operatorStack.pop());
                 }
-            } else if (token == '(') {
+            } else if (token.equals("(")) {
                 operatorStack.push(""+token);
-            } else if (token == ')') {
+            } else if (token.equals(")")) {
                 // While the operator at the top of the operator stack is not a left parenthesis
                 while (!operatorStack.empty() && !operatorStack.lastElement().equals("(")) {
                     // Pop the operator from the operator stack into the output queue
-                    outputQueue += operatorStack.pop();
+                    outputQueue.push(operatorStack.pop());
                 }
 
                 // Remove left parenthesis as it SHOULD be in top of the queue now
@@ -116,7 +107,7 @@ while there are tokens on the operator stack:
 
                 // If there is a function token at the top of the operator stack, then pop it into output queue
                 if (!operatorStack.empty() && operatorStack.lastElement().equals("sin") || operatorStack.lastElement().equals("sqrt") || operatorStack.lastElement().equals("min") || operatorStack.lastElement().equals("max")) {
-                    outputQueue += operatorStack.pop();
+                    outputQueue.push(operatorStack.pop());
                 }
             } else {
                 throw new Exception("Invalid token: " + token);
@@ -128,10 +119,28 @@ while there are tokens on the operator stack:
         pop the operator from the operator stack onto the output queue
                 */
         while (!operatorStack.empty()) {
-            outputQueue += operatorStack.pop();
+            outputQueue.push(operatorStack.pop());
         }
 
-        return outputQueue;
+        String output = "";
+        if (!outputQueue.isEmpty()) {
+            for (String s : outputQueue) {
+                output += s + " ";
+            }
+        }
+        return output.trim();
+    }
+
+    public boolean isDigit(String string) {
+        if (string == null || string.isEmpty()) {
+            return false;
+        }
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public boolean firstIsGreaterInPrecedence(String first, String second) {
