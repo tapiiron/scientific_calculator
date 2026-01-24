@@ -66,15 +66,7 @@ while there are tokens on the operator stack:
                     throw new Exception("Invalid function: " + token);
                 }
             } else if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/") || token.equals("^")) { // If token is operator
-                // TODO: logic here
                 /**
-                 * Operator	Precedence	Associativity
-                 * ^	4	Right
-                 * ×	3	Left
-                 * ÷	3	Left
-                 * +	2	Left
-                 * −	2	Left
-                 *
                  * while (
                  *             there is an operator o2 at the top of the operator stack which is not a left parenthesis,
                  *             and (o2 has greater precedence than o1 or (o1 and o2 have the same precedence and o1 is left-associative))
@@ -90,7 +82,7 @@ while there are tokens on the operator stack:
             } else if (token.equals(",")) {
                 /* while the operator at the top of the operator stack is not a left parenthesis:
                 pop the operator from the operator stack into the output queue*/
-                if (!operatorStack.lastElement().equals("(")) {
+                while (!operatorStack.empty() && !operatorStack.lastElement().equals("(")) {
                     outputQueue.push(operatorStack.pop());
                 }
             } else if (token.equals("(")) {
@@ -144,7 +136,21 @@ while there are tokens on the operator stack:
     }
 
     public boolean firstIsGreaterInPrecedence(String first, String second) {
-        // TODO: implement
+        /*
+         * Operator	Precedence	Associativity
+         * ^	4	Right
+         * ×	3	Left
+         * ÷	3	Left
+         * +	2	Left
+         * −	2	Left
+         */
+        if (first.equals("^")) {
+            return true;
+        } else if (first.equals("*") || first.equals("/")) {
+            return !second.equals("*") && !second.equals("/") && !second.equals("^");
+        } else if (first.equals("+") || first.equals("-")) {
+            return second.equals("+") || second.equals("-");
+        }
         return false;
     }
 

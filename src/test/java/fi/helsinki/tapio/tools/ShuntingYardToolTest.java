@@ -7,8 +7,8 @@ public class ShuntingYardToolTest extends TestCase {
     public void testCalculateOutputStack() {
         ShuntingYardTool tool = new ShuntingYardTool();
         try {
-            String result = tool.calculateOutputStack("3 + 4");
-            assertEquals("3 4 +", result);
+            assertEquals("3 4 +", tool.calculateOutputStack("3 + 4"));
+            assertEquals("3 4 7 / +", tool.calculateOutputStack("3 + 4 / 7"));
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -22,5 +22,10 @@ public class ShuntingYardToolTest extends TestCase {
     }
 
     public void testFirstIsGreaterInPrecedence() {
+        ShuntingYardTool tool = new ShuntingYardTool();
+        assertTrue(tool.firstIsGreaterInPrecedence("^", "*"));
+        assertTrue(tool.firstIsGreaterInPrecedence("^", "+"));
+        assertTrue(tool.firstIsGreaterInPrecedence("*", "+"));
+        assertFalse(tool.firstIsGreaterInPrecedence("+", "*"));
     }
 }

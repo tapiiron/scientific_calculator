@@ -5,5 +5,6 @@
 - Made simple implementation from pseudo code
 - Added unit tests
 - Noticed that number can be many chars long so changed to String in token handling
+- Initially completing the Shunting Yard logic
 
 Hours spent: 6 h
