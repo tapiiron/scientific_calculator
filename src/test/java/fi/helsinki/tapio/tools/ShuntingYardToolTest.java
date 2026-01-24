@@ -9,6 +9,7 @@ public class ShuntingYardToolTest extends TestCase {
         try {
             assertEquals("3 4 +", tool.calculateOutputStack("3 + 4"));
             assertEquals("3 4 7 / +", tool.calculateOutputStack("3 + 4 / 7"));
+            assertEquals("1 2 + 2 MAX 3 +", tool.calculateOutputStack("MAX ( 1 + 2 , 2 ) + 3"));
         } catch (Exception e) {
             fail(e.getMessage());
         }

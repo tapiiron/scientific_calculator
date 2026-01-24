@@ -41,7 +41,7 @@ while there are tokens on the operator stack:
         if (input == null || input.length() < 1 || !input.contains(" ")) {
             throw new Exception("Invalid input");
         }
-        input = input.toLowerCase();
+        input = input.toUpperCase();
 
         int index = 0;
         String[] tokens = input.split(" ");
@@ -58,9 +58,9 @@ while there are tokens on the operator stack:
 
             if (isDigit(token)) { // If token is number
                 outputQueue.push(token);
-            } else if (token.startsWith("s") || token.startsWith("m")) { // If token is function
+            } else if (token.startsWith("S") || token.startsWith("M")) { // If token is function
                 // Check that funtion is valid
-                if (token.equals("sin") || token.equals("sqrt") || token.equals("min") || token.equals("max")) {
+                if (token.equals("SIN") || token.equals("SQRT") || token.equals("MIN") || token.equals("MAX")) {
                     operatorStack.push(token);
                 } else {
                     throw new Exception("Invalid function: " + token);
@@ -95,10 +95,17 @@ while there are tokens on the operator stack:
                 }
 
                 // Remove left parenthesis as it SHOULD be in top of the queue now
-                operatorStack.pop();
+                if (operatorStack.lastElement().equals("(")) {
+                    operatorStack.pop();
+                } else {
+                    throw new Exception("Left parenthesis missing!");
+                }
 
                 // If there is a function token at the top of the operator stack, then pop it into output queue
-                if (!operatorStack.empty() && operatorStack.lastElement().equals("sin") || operatorStack.lastElement().equals("sqrt") || operatorStack.lastElement().equals("min") || operatorStack.lastElement().equals("max")) {
+                if (!operatorStack.empty() && operatorStack.lastElement().equals("SIN") ||
+                        operatorStack.lastElement().equals("SQRT") ||
+                        operatorStack.lastElement().equals("MIN") ||
+                        operatorStack.lastElement().equals("MAX")) {
                     outputQueue.push(operatorStack.pop());
                 }
             } else {
