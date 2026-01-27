@@ -67,17 +67,23 @@ while there are tokens on the operator stack:
                 }
             } else if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/") || token.equals("^")) { // If token is operator
                 /**
-                 * while (
+                 * while (   o1 == operator,  o2==top in stack
                  *             there is an operator o2 at the top of the operator stack which is not a left parenthesis,
                  *             and (o2 has greater precedence than o1 or (o1 and o2 have the same precedence and o1 is left-associative))
                  *         ):
                  *             pop o2 from the operator stack into the output queue
                  *         push o1 onto the operator stack
                  */
-                while (!operatorStack.empty() && !operatorStack.lastElement().equals("(") && firstIsGreaterInPrecedence(operatorStack.lastElement(), "" + token)) {
+                while (!operatorStack.empty() && !operatorStack.lastElement().equals("(")
+                        // ^ is evaluated right-to-left
+                        && !operatorStack.lastElement().equals("^")
+                        && firstIsGreaterInPrecedence(operatorStack.lastElement(), token) ||
+                        (!operatorStack.empty() && operatorsHaveSamePrecedence(operatorStack.lastElement(), token) && !token.equals("^"))
+                ) {
                     outputQueue.push(operatorStack.pop());
                 }
-                operatorStack.push(""+token);
+                operatorStack.push(token);
+
 
             } else if (token.equals(",")) {
                 /* while the operator at the top of the operator stack is not a left parenthesis:
@@ -86,7 +92,7 @@ while there are tokens on the operator stack:
                     outputQueue.push(operatorStack.pop());
                 }
             } else if (token.equals("(")) {
-                operatorStack.push(""+token);
+                operatorStack.push(token);
             } else if (token.equals(")")) {
                 // While the operator at the top of the operator stack is not a left parenthesis
                 while (!operatorStack.empty() && !operatorStack.lastElement().equals("(")) {
@@ -155,6 +161,17 @@ while there are tokens on the operator stack:
             return true;
         } else if (first.equals("*") || first.equals("/")) {
             return !second.equals("*") && !second.equals("/") && !second.equals("^");
+        } else if (first.equals("+") || first.equals("-")) {
+            return second.equals("+") || second.equals("-");
+        }
+        return false;
+    }
+
+    public boolean operatorsHaveSamePrecedence(String first, String second) {
+        if (first.equals("^") || second.equals("^")) {
+            return true;
+        } else if (first.equals("*") || first.equals("/")) {
+            return second.equals("*") || second.equals("/");
         } else if (first.equals("+") || first.equals("-")) {
             return second.equals("+") || second.equals("-");
         }
