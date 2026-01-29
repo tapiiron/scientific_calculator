@@ -108,10 +108,10 @@ while there are tokens on the operator stack:
                 }
 
                 // If there is a function token at the top of the operator stack, then pop it into output queue
-                if (!operatorStack.empty() && operatorStack.lastElement().equals("SIN") ||
+                if (!operatorStack.empty() && (operatorStack.lastElement().equals("SIN") ||
                         operatorStack.lastElement().equals("SQRT") ||
                         operatorStack.lastElement().equals("MIN") ||
-                        operatorStack.lastElement().equals("MAX")) {
+                        operatorStack.lastElement().equals("MAX"))) {
                     outputQueue.push(operatorStack.pop());
                 }
             } else {
@@ -133,6 +133,11 @@ while there are tokens on the operator stack:
                 output += s + " ";
             }
         }
+
+        if (output.contains("(")) {
+            throw new Exception("Invalid input");
+        }
+
         return output.trim();
     }
 
