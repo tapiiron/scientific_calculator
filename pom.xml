@@ -61,7 +61,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>fi.helsinki.tapio.Main</mainClass>
+                <mainClass>fi.helsinki.tapio.App</mainClass>
               </manifest>
             </archive>
           </configuration>
