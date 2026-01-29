@@ -14,7 +14,7 @@ public class ReversePolishNotationCalculator {
             if (isDigit(token)) {
                 operandStack.push(token);
             } else {
-                if (operandStack.size() == 1 && (token.equals("SIN") || token.equals("SQRT"))) {
+                if (token.equals("SIN") || token.equals("SQRT")) {
                     double operand = Double.parseDouble(operandStack.pop());
                     double result = calculate(token, operand, 0);
                     operandStack.push(String.valueOf(result));
