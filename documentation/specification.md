@@ -3,11 +3,17 @@ Degree programme: bachelor's in computer science (CS).
 
 Programming language used in implementation: Java
 
-This project implements scientific calculator using shunting-yard algorithm. With shunting yard algorithm input is transformed into Reverse Polish Notation (RPN). Program takes input of one calculation like 1+2*3 and uses shunting-yard to calculate the output for final calculation. Program takes as an input also functions sqrt,sin,min and max. When getting any kind of error, program returns no answer.
+This project implements scientific calculator using shunting-yard algorithm.
+With shunting yard algorithm input is transformed into Reverse Polish Notation (RPN).
+Program takes input of one calculation like 1+2*3 and uses shunting-yard to calculate the output
+for final calculation using RPN calculator. Program takes as an input also functions sqrt,sin,min and max.
+When getting any kind of error, program returns no answer.
 
-Program UI is a simple console based UI to receive input for calculation. Program returns calculated value. For invalid input program will return an error.
+Program UI is a simple console based UI to receive input for calculation.
+Program returns calculated value. For invalid input program will return an error.
 
 # Targeted time and space requirements
+
 Shunting yard has linear time requirement O(n). As the input grows the time consumtion grows at about the same level.
 
 # Sources used on implementation

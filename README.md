@@ -1,8 +1,9 @@
 ## Scientific calculator - UH school work 2026
 
 # Documentation
-[Specification](documentation/specification.md)
 
+[Specification](documentation/specification.md)<br>
+[Testing](documentation/testing.md)
 
 # Weekly reports
 
