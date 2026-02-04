@@ -1,8 +1,19 @@
-- Ohjelman yleisrakenne
-- Saavutetut aika- ja tilavaativuudet (esim. O-analyysit pseudokoodista)
-- Suorituskyky- ja O-analyysivertailu (mikäli sopii työn aiheeseen)
-- Työn mahdolliset puutteet ja parannusehdotukset
-- Laajojen kielimallien (ChatGPT yms.) käyttö. Mainitse mitä mallia on käytetty ja miten. Mainitse myös mikäli et ole
-  käyttänyt. Tämä on tärkeää!
-- Lähteet, joita olet käyttänyt, vain ne joilla oli merkitystä työn kannalta.
-- 
+# Implementation documentation
+
+## Program structure
+
+App - Provides simple interface for the user to interact with the program.
+ShuntingYardTool - Provides the actual shunting yard algorithm.
+ReversePolishNotationCalculator - Provides calculations based on reverse polish notation from Shunting Yard.
+
+## Achieved time and efficiency goals
+
+When doing load testing shunting yard algorithm was able to achieve wikipedia O(n) time complexity.
+
+## Future improvements
+
+## Use of Large Language Models
+
+## References
+
+

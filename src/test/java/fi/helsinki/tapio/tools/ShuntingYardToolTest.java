@@ -1,5 +1,6 @@
 package fi.helsinki.tapio.tools;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -51,6 +52,7 @@ public class ShuntingYardToolTest {
     }
 
     @Test
+    @Tag("loadtest")
     public void testLoadByHundredThousandCalculations() {
         try {
             ShuntingYardTool tool = new ShuntingYardTool();
@@ -64,6 +66,7 @@ public class ShuntingYardToolTest {
     }
 
     @Test
+    @Tag("loadtest")
     public void testLoadByMillionCalculations() {
         try {
             ShuntingYardTool tool = new ShuntingYardTool();
@@ -77,6 +80,7 @@ public class ShuntingYardToolTest {
     }
 
     @Test
+    @Tag("loadtest")
     public void testLoadByAddingCalculatedElements() {
         try {
             ShuntingYardTool tool = new ShuntingYardTool();
