@@ -1,9 +1,15 @@
 package fi.helsinki.tapio.tools;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class ShuntingYardToolTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
+public class ShuntingYardToolTest {
+
+    @Test
     public void testCalculateOutputStack() {
         ShuntingYardTool tool = new ShuntingYardTool();
         try {
@@ -21,12 +27,14 @@ public class ShuntingYardToolTest extends TestCase {
 
     }
 
+    @Test
     public void testIsDigit() {
         ShuntingYardTool tool = new ShuntingYardTool();
         assertTrue(tool.isDigit("123"));
         assertFalse(tool.isDigit("123a"));
     }
 
+    @Test
     public void testFirstIsGreaterInPrecedence() {
         ShuntingYardTool tool = new ShuntingYardTool();
         assertTrue(tool.firstIsGreaterInPrecedence("^", "*"));
@@ -35,9 +43,51 @@ public class ShuntingYardToolTest extends TestCase {
         assertFalse(tool.firstIsGreaterInPrecedence("+", "*"));
     }
 
+    @Test
     public void testOperatorsHaveSamePrecedence() {
         ShuntingYardTool tool = new ShuntingYardTool();
         assertTrue(tool.operatorsHaveSamePrecedence("*", "*"));
         assertFalse(tool.operatorsHaveSamePrecedence("+", "/"));
+    }
+
+    @Test
+    public void testLoadByHundredThousandCalculations() {
+        try {
+            ShuntingYardTool tool = new ShuntingYardTool();
+            for (int i = 0; i < 100000; i++) {
+                tool.calculateOutputStack("3 + 4");
+            }
+            assertTrue(true);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testLoadByMillionCalculations() {
+        try {
+            ShuntingYardTool tool = new ShuntingYardTool();
+            for (int i = 0; i < 1000000; i++) {
+                tool.calculateOutputStack("3 + 4");
+            }
+            assertTrue(true);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testLoadByAddingCalculatedElements() {
+        try {
+            ShuntingYardTool tool = new ShuntingYardTool();
+            String expression = "3 + 3 / ( 2 + 1 )";
+            for (int i = 0; i < 1000; i++) {
+                expression += " + 3 * 3";
+                tool.calculateOutputStack(expression);
+            }
+            assertTrue(true);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 }

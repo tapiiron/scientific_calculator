@@ -1,4 +1,4 @@
-# Weekly Report #2
+# Weekly Report #3
 
 - By going through wikipedia examples. Got the Shunting Yard logic working. For now calling it finished.
 - Created simple main app to test the logic.
