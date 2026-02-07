@@ -56,7 +56,7 @@ while there are tokens on the operator stack:
         while (index<tokens.length) {
             String token = tokens[index];
 
-            if (isDigit(token)) { // If token is number
+            if (CommonTools.isNumber(token)) { // If token is number
                 outputQueue.push(token);
             } else if (token.startsWith("S") || token.startsWith("M")) { // If token is function
                 // Check that funtion is valid
@@ -139,18 +139,6 @@ while there are tokens on the operator stack:
         }
 
         return output.trim();
-    }
-
-    public boolean isDigit(String string) {
-        if (string == null || string.isEmpty()) {
-            return false;
-        }
-        try {
-            Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     public boolean firstIsGreaterInPrecedence(String first, String second) {

@@ -1,7 +1,10 @@
 package fi.helsinki.tapio.tools;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,6 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ShuntingYardToolTest {
+
+    private static long startTime;
+    private static long endTime;
+
+    @BeforeEach
+    public void setStartTime() {
+        startTime = System.currentTimeMillis();
+    }
+
+    @AfterEach
+    public void setEndTime(TestInfo test) {
+        endTime = System.currentTimeMillis();
+        System.out.println("Time taken by test (" + test.getTestMethod() + "): " + (endTime - startTime) + " ms");
+    }
 
     @Test
     public void testCalculateOutputStack() {
@@ -26,13 +43,6 @@ public class ShuntingYardToolTest {
             fail(e.getMessage());
         }
 
-    }
-
-    @Test
-    public void testIsDigit() {
-        ShuntingYardTool tool = new ShuntingYardTool();
-        assertTrue(tool.isDigit("123"));
-        assertFalse(tool.isDigit("123a"));
     }
 
     @Test

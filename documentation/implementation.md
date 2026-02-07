@@ -8,7 +8,8 @@ ReversePolishNotationCalculator - Provides calculations based on reverse polish 
 
 ## Achieved time and efficiency goals
 
-When doing load testing shunting yard algorithm was able to achieve wikipedia O(n) time complexity.
+When doing load testing shunting yard algorithm was able to achieve wikipedia O(n) time complexity. Testing was done by
+changing the number of test operations by hand.
 
 ## Future improvements
 

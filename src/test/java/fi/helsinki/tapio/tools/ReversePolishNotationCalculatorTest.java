@@ -3,8 +3,6 @@ package fi.helsinki.tapio.tools;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReversePolishNotationCalculatorTest {
 
@@ -42,10 +40,4 @@ public class ReversePolishNotationCalculatorTest {
         assertEquals(5.0, calculator.calculate("SQRT", 25, 0));
     }
 
-    @Test
-    public void testIsDigit() {
-        ReversePolishNotationCalculator calculator = new ReversePolishNotationCalculator();
-        assertTrue(calculator.isDigit("123"));
-        assertFalse(calculator.isDigit("123a"));
-    }
 }

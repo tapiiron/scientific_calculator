@@ -11,7 +11,7 @@ public class ReversePolishNotationCalculator {
         Stack<String> operandStack = new Stack<>();
         String[] tokens = rpnString.split(" ");
         for (String token : tokens) {
-            if (isDigit(token)) {
+            if (CommonTools.isNumber(token)) {
                 operandStack.push(token);
             } else {
                 if (token.equals("SIN") || token.equals("SQRT")) {
@@ -59,18 +59,6 @@ public class ReversePolishNotationCalculator {
             return Math.sqrt(operand1);
         } else {
             throw new IllegalArgumentException("Invalid operator: " + operator);
-        }
-    }
-
-    public boolean isDigit(String string) {
-        if (string == null || string.isEmpty()) {
-            return false;
-        }
-        try {
-            Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
         }
     }
 }
