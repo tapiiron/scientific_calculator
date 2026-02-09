@@ -1,5 +1,6 @@
 package fi.helsinki.tapio;
 
+import fi.helsinki.tapio.tools.CommonTools;
 import fi.helsinki.tapio.tools.ReversePolishNotationCalculator;
 import fi.helsinki.tapio.tools.ShuntingYardTool;
 
@@ -103,7 +104,7 @@ public class App {
                     String varName = System.console().readLine();
                     System.out.println("Enter variable value: ");
                     String varValue = System.console().readLine();
-                    if (varName == null || varValue == null || !varName.matches("[a-z]")) {
+                    if (varName == null || !varName.matches("[a-z]") || !CommonTools.isNumber(varValue)) {
                         System.out.println("ERROR in input");
                         return;
                     }
