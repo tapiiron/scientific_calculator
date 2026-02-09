@@ -94,7 +94,7 @@ public class App {
                 String command = System.console().readLine();
 
                 if (command.equals("1")) {
-                    System.out.println("Remember to enter calculation in form of RPN (Reverse Polish Notation) like '1 + 2 + SUM ( 1 + 2 )'");
+                    System.out.println("Remember to enter calculation in form of RPN (Reverse Polish Notation) like '1 + 2 + MIN ( 1 , 2 )'");
                     System.out.println("Enter calculation: ");
                     calculationString = System.console().readLine();
                     calculate(calculationString);
@@ -111,7 +111,7 @@ public class App {
                 } else if (command.equals("3")) {
                     System.out.println("Enter variable name (a-z): ");
                     String varName = System.console().readLine();
-                    System.out.println("Remember to enter calculation in form of RPN (Reverse Polish Notation) like '1 + 2 + SUM ( 1 + 2 )'");
+                    System.out.println("Remember to enter calculation in form of RPN (Reverse Polish Notation) like '1 + 2 + MIN ( 1 , 2 )'");
                     System.out.println("Enter calculation: ");
                     String calculation = System.console().readLine();
                     if (varName == null || calculation == null || !varName.matches("[a-z]")) {
