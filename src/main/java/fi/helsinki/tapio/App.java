@@ -37,6 +37,10 @@ public class App {
 
     private static Double calculate(String calculationString) throws RuntimeException {
         if (calculationString == null || calculationString.isEmpty()) {
+            // If calculation is just a number, return it
+            if (CommonTools.isNumber(calculationString)) {
+                return Double.parseDouble(calculationString);
+            }
             throw new RuntimeException("ERROR in input");
         }
         if (!variables.isEmpty()) {
