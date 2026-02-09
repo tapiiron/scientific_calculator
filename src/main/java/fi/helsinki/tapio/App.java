@@ -27,7 +27,11 @@ public class App {
             System.out.println("ERROR in input");
             return;
         }
-        calculate(calculationString);
+        try {
+            calculate(calculationString);
+        } catch (RuntimeException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
     }
 
     private static Double calculate(String calculationString) throws RuntimeException {
