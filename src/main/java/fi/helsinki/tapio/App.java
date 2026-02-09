@@ -35,7 +35,7 @@ public class App {
         }
     }
 
-    private static Double calculate(String calculationString) throws RuntimeException {
+    protected static Double calculate(String calculationString) throws RuntimeException {
         if (calculationString == null || calculationString.isEmpty()) {
             // If calculation is just a number, return it
             if (CommonTools.isNumber(calculationString)) {
@@ -77,6 +77,10 @@ public class App {
         }
     }
 
+    protected static void addOrChangeVariable(String variableName, Double variableValue) {
+        variables.put(variableName, variableValue);
+    }
+
     public void run() {
         String calculationString = null;
         boolean running = true;
@@ -112,7 +116,7 @@ public class App {
                         System.out.println("ERROR in input");
                         return;
                     }
-                    variables.put(varName, Double.parseDouble(varValue));
+                    addOrChangeVariable(varName, Double.parseDouble(varValue));
                 } else if (command.equals("3")) {
                     System.out.println("Enter variable name (a-z): ");
                     String varName = System.console().readLine();
@@ -123,7 +127,7 @@ public class App {
                         System.out.println("ERROR in input");
                         return;
                     }
-                    variables.put(varName, calculate(calculation));
+                    addOrChangeVariable(varName, calculate(calculation));
                 } else if (command.equals("4")) {
                     System.out.println("Bye!");
                     running = false;
