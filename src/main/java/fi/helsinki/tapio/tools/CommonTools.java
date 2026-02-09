@@ -1,6 +1,7 @@
 package fi.helsinki.tapio.tools;
 
 public class CommonTools {
+
     public static boolean isNumber(String string) {
         if (string == null || string.isEmpty()) {
             return false;
@@ -12,4 +13,5 @@ public class CommonTools {
             return false;
         }
     }
+
 }

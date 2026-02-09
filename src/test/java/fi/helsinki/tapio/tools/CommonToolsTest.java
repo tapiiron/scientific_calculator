@@ -13,4 +13,5 @@ class CommonToolsTest {
         assertTrue(CommonTools.isNumber("123.2"));
         assertFalse(CommonTools.isNumber("123a"));
     }
+
 }
