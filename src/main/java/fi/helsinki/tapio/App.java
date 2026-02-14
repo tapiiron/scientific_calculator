@@ -25,7 +25,7 @@ public class App {
             calculationString = args[0];
         }
         if (calculationString == null || calculationString.isEmpty()) {
-            System.out.println("ERROR in input");
+            System.out.println("Invalid input");
             return;
         }
         try {
@@ -37,12 +37,16 @@ public class App {
 
     protected static Double calculate(String calculationString) throws RuntimeException {
         if (calculationString == null || calculationString.isEmpty()) {
-            // If calculation is just a number, return it
-            if (CommonTools.isNumber(calculationString)) {
-                return Double.parseDouble(calculationString);
-            }
-            throw new RuntimeException("ERROR in input");
+            throw new RuntimeException("Invalid input");
         }
+
+        // If calculation is just a number, return it
+        if (CommonTools.isNumber(calculationString)) {
+            double result = Double.parseDouble(calculationString);
+            System.out.println("Result: " + result + "\n");
+            return result;
+        }
+
         if (!variables.isEmpty()) {
             String[] tokens = calculationString.split(" ");
 
@@ -64,16 +68,17 @@ public class App {
             // Reconstruct calculation string
             calculationString = String.join(" ", tokens);
         }
+
         ShuntingYardTool syTool = new ShuntingYardTool();
         ReversePolishNotationCalculator rpnCalc = new ReversePolishNotationCalculator();
         try {
             String syOutput = syTool.calculateOutputStack(calculationString);
             double result = rpnCalc.calculateFromRPNString(syOutput);
-            System.out.println("Result: " + result);
-            System.out.println();
+            System.out.println("Result: " + result + "\n");
             return result;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IllegalArgumentException e) {
+            // RPN string is invalid, for user return "Invalid input""
+            throw new RuntimeException("Invalid input: " + calculationString + ". " + e.getMessage());
         }
     }
 

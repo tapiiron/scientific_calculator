@@ -20,11 +20,13 @@ public class AppTest {
 
     @Test
     void calculate() {
-        // Simple test
+        // Simple calculation
         assertEquals(3.0, App.calculate("2 + 1"));
         // Test with variables
         App.addOrChangeVariable("a", 2.0);
         assertEquals(3.0, App.calculate("a + 1"));
         assertEquals(8.0, App.calculate("a + 3 * a"));
+        // Test with a single number input
+        assertEquals(1.0, App.calculate("1"));
     }
 }

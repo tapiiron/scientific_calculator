@@ -37,9 +37,9 @@ while there are tokens on the operator stack:
     pop the operator from the operator stack onto the output queue
      */
 
-    public String calculateOutputStack(String input) throws Exception {
+    public String calculateOutputStack(String input) throws IllegalArgumentException {
         if (input == null || input.length() < 1 || !input.contains(" ")) {
-            throw new Exception("Invalid input");
+            throw new IllegalArgumentException("Invalid input");
         }
         input = input.toUpperCase();
 
@@ -63,7 +63,7 @@ while there are tokens on the operator stack:
                 if (token.equals("SIN") || token.equals("SQRT") || token.equals("MIN") || token.equals("MAX")) {
                     operatorStack.push(token);
                 } else {
-                    throw new Exception("Invalid function: " + token);
+                    throw new IllegalArgumentException("Invalid function: " + token);
                 }
             } else if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/") || token.equals("^")) { // If token is operator
                 /**
@@ -104,7 +104,7 @@ while there are tokens on the operator stack:
                 if (operatorStack.lastElement().equals("(")) {
                     operatorStack.pop();
                 } else {
-                    throw new Exception("Left parenthesis missing!");
+                    throw new IllegalArgumentException("Left parenthesis missing!");
                 }
 
                 // If there is a function token at the top of the operator stack, then pop it into output queue
@@ -115,7 +115,7 @@ while there are tokens on the operator stack:
                     outputQueue.push(operatorStack.pop());
                 }
             } else {
-                throw new Exception("Invalid token: " + token);
+                throw new IllegalArgumentException("Invalid token: " + token);
             }
             index++;
         }
@@ -135,7 +135,7 @@ while there are tokens on the operator stack:
         }
 
         if (output.contains("(")) {
-            throw new Exception("Invalid input");
+            throw new IllegalArgumentException("Invalid input");
         }
 
         return output.trim();
