@@ -61,6 +61,10 @@ public class App {
             return result;
         }
 
+        if (!validateUserInputForCommonTypoes(calculationString)) {
+            throw new RuntimeException("Invalid input: " + calculationString);
+        }
+
         if (!variables.isEmpty()) {
             String[] tokens = calculationString.split(" ");
 
@@ -104,6 +108,27 @@ public class App {
      */
     protected static void addOrChangeVariable(String variableName, Double variableValue) {
         variables.put(variableName, variableValue);
+    }
+
+    protected static boolean validateUserInputForCommonTypoes(String calculationString) {
+        if (calculationString == null || calculationString.isEmpty()) {
+            return false;
+        }
+        // Check that there is not two operators in a row
+        String noSpacesCalculationString = calculationString.replaceAll(" ", "");
+        if (noSpacesCalculationString.contains("++") ||
+                noSpacesCalculationString.contains("--") ||
+                noSpacesCalculationString.contains("-+") ||
+                noSpacesCalculationString.contains("**") ||
+                noSpacesCalculationString.contains("^^") ||
+                noSpacesCalculationString.contains("^*") ||
+                noSpacesCalculationString.contains("*^") ||
+                noSpacesCalculationString.contains("-*") ||
+                noSpacesCalculationString.contains("+*")) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

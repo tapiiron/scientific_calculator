@@ -2,5 +2,6 @@
 
 - Added usage instructions -page
 - Add javadoc documentation
+- Simple input validation for two operators in a row from user input
 
-Hours spent: 2 h
+Hours spent: 4 h
