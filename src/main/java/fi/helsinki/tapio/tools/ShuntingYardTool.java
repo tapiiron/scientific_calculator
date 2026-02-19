@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class ShuntingYardTool {
     /**
-     * pseudo from wikipedia
+     * pseudo from Wikipedia
      * while there are tokens to be read:
     read a token
     if the token is:
@@ -37,6 +37,18 @@ while there are tokens on the operator stack:
     pop the operator from the operator stack onto the output queue
      */
 
+    /**
+     * Parses the given mathematical expression in infix notation and converts it into postfix (Reverse Polish Notation).
+     * Implements the Shunting Yard algorithm to handle operators, functions, and operands.
+     *
+     * @param input the input string containing a mathematical expression in infix notation. It must contain valid
+     *              tokens separated by spaces. Tokens include numbers, operators (+, -, *, /, ^), parentheses,
+     *              and supported functions (SIN, SQRT, MIN, MAX).
+     * @return a string representing the mathematical expression in postfix (Reverse Polish Notation).
+     * The tokens in the output are separated by a single space.
+     * @throws IllegalArgumentException if the input is null, empty, contains invalid tokens, unbalanced
+     *                                  parentheses, or other syntactical errors.
+     */
     public String calculateOutputStack(String input) throws IllegalArgumentException {
         if (input == null || input.length() < 1 || !input.contains(" ")) {
             throw new IllegalArgumentException("Invalid input");
@@ -141,6 +153,15 @@ while there are tokens on the operator stack:
         return output.trim();
     }
 
+    /**
+     * Determines whether the first operator has greater precedence than the second operator
+     * based on standard operator precedence rules.
+     *
+     * @param first the first operator as a string. Supported operators are: "^", "*", "/", "+", "-".
+     * @param second the second operator as a string. Supported operators are: "^", "*", "/", "+", "-".
+     * @return {@code true} if the first operator has higher precedence than the second operator,
+     *         {@code false} otherwise.
+     */
     public boolean firstIsGreaterInPrecedence(String first, String second) {
         /*
          * Operator	Precedence	Associativity
@@ -160,6 +181,14 @@ while there are tokens on the operator stack:
         return false;
     }
 
+    /**
+     * Determines whether two mathematical operators have the same precedence according
+     * to standard operator precedence rules.
+     *
+     * @param first the first operator as a string. Supported operators are: "^", "*", "/", "+", "-".
+     * @param second the second operator as a string. Supported operators are: "^", "*", "/", "+", "-".
+     * @return {@code true} if both operators have the same precedence, {@code false} otherwise.
+     */
     public boolean operatorsHaveSamePrecedence(String first, String second) {
         if (first.equals("^") || second.equals("^")) {
             return true;

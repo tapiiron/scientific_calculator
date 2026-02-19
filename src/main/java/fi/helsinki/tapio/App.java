@@ -7,13 +7,18 @@ import fi.helsinki.tapio.tools.ShuntingYardTool;
 import java.util.HashMap;
 
 /**
- * A simple app to take either argument or user input and calculate result
- *
+ * The App class implements a command-line tool for performing mathematical calculations
+ * using the Shunting Yard algorithm and Reverse Polish Notation (RPN) calculator. It also
+ * provides functionality for defining and updating variables, as well as an interactive
+ * user interface.
  */
 public class App {
 
     private static final HashMap<String, Double> variables = new HashMap<>();
 
+    /**
+     * The entry point for the application.
+     */
     public static void main( String[] args ) {
         String calculationString = null;
 
@@ -35,6 +40,15 @@ public class App {
         }
     }
 
+    /**
+     * Calculates the result of a mathematical expression provided as a string using the Shunting Yard
+     * algorithm and Reverse Polish Notation (RPN) calculator.
+     *
+     * @param calculationString the mathematical expression to calculate, represented as a string.
+     *                          Can include numbers, operators, and variables.
+     * @return the calculated result of the mathematical expression as a Double value.
+     * @throws RuntimeException if the input is null, empty, invalid, or contains unresolved variables.
+     */
     protected static Double calculate(String calculationString) throws RuntimeException {
         if (calculationString == null || calculationString.isEmpty()) {
             throw new RuntimeException("Invalid input");
@@ -82,10 +96,19 @@ public class App {
         }
     }
 
+    /**
+     * Adds a new variable or updates the value of an existing variable in the collection.
+     *
+     * @param variableName  the name of the variable to add or update
+     * @param variableValue the value to assign to the variable
+     */
     protected static void addOrChangeVariable(String variableName, Double variableValue) {
         variables.put(variableName, variableValue);
     }
 
+    /**
+     * The main program user interface.
+     */
     public void run() {
         String calculationString = null;
         boolean running = true;

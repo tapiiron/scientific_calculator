@@ -4,6 +4,15 @@ import java.util.Stack;
 
 public class ReversePolishNotationCalculator {
 
+    /**
+     * Calculates the result of a mathematical expression represented as a string
+     * in Reverse Polish Notation (RPN).
+     *
+     * @param rpnString the RPN expression as a space-separated string.
+     * @return the calculated result of the RPN expression as a double value.
+     * @throws IllegalArgumentException if the input string is null, empty, has invalid tokens,
+     *                                  does not use proper RPN syntax, or leads to an invalid computation.
+     */
     public double calculateFromRPNString(String rpnString) throws IllegalArgumentException {
         if (rpnString == null || rpnString.isEmpty() || !rpnString.contains(" ")) {
             throw new IllegalArgumentException("Invalid RPN string");
@@ -37,6 +46,19 @@ public class ReversePolishNotationCalculator {
         }
     }
 
+    /**
+     * Performs a mathematical calculation based on the specified operator and operands.
+     * Supports both binary and single operand operations.
+     *
+     * @param operator the mathematical operator to apply. Supported operators include:
+     *                 "+" (addition), "-" (subtraction), "*" (multiplication),
+     *                 "/" (division), "^" (exponentiation), "MAX" (maximum),
+     *                 "MIN" (minimum), "SIN" (sine in degrees), "SQRT" (square root).
+     * @param operand1 the first operand. For single operand operations like "SIN" and "SQRT", this is the only operand used.
+     * @param operand2 the second operand. This is only used for binary operations like "+", "-", "*", "/", "^", "MAX", and "MIN".
+     * @return the calculated result of applying the operator to the operand(s).
+     * @throws IllegalArgumentException if the operator is invalid or not supported.
+     */
     public double calculate(String operator, double operand1, double operand2) throws IllegalArgumentException {
         if (operator.equals("+")) {
             return operand1 + operand2;
