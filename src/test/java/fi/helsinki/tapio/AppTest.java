@@ -3,6 +3,7 @@ package fi.helsinki.tapio;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -28,5 +29,12 @@ public class AppTest {
         assertEquals(8.0, App.calculate("a + 3 * a"));
         // Test with a single number input
         assertEquals(1.0, App.calculate("1"));
+    }
+
+    @Test
+    void validateUserInputForCommonTypoes() {
+        assertTrue(App.validateUserInputForCommonTypoes("1 + 2"));
+        assertFalse(App.validateUserInputForCommonTypoes("1 + + 2"));
+
     }
 }

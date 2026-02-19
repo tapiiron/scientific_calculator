@@ -110,6 +110,14 @@ public class App {
         variables.put(variableName, variableValue);
     }
 
+    /**
+     * Validates the user input for common typoes.
+     *
+     * @param calculationString the input string representing a mathematical expression to validate.
+     *                          It is expected to include numbers, operators, and variables in a valid format.
+     * @return {@code true} if the input string is non-null, non-empty, and free of common typographical errors;
+     * {@code false} otherwise.
+     */
     protected static boolean validateUserInputForCommonTypoes(String calculationString) {
         if (calculationString == null || calculationString.isEmpty()) {
             return false;
